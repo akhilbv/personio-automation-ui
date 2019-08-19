@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'personio'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compile
+}
+
+dependencies {
+    compile group: 'junit', name: 'junit', version: '4.12'
+
+    // dependencies for selenium
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "${seleniumVersion}"
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: "${seleniumVersion}"
+
+    //dependencies for cucumber
+    compile group: 'info.cukes', name: 'cucumber-core', version: "${cucumberVersion}"
+    compile group: 'info.cukes', name: 'cucumber-java', version: "${cucumberVersion}"
+    compile group: 'info.cukes', name: 'cucumber-testng', version: "${cucumberVersion}"
+    compile group: 'info.cukes', name: 'cucumber-junit', version: "${cucumberVersion}"
+
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+}
