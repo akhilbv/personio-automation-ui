@@ -1,4 +1,4 @@
-package com.personio.automation.ui.com.personio.automation.ui.utils;
+package com.personio.automation.ui.utils;
 
 import java.util.ResourceBundle;
 

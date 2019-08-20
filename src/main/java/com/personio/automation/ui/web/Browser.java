@@ -1,7 +1,7 @@
 package com.personio.automation.ui.web;
 
 import com.personio.automation.ui.AutomationError;
-import com.personio.automation.ui.com.personio.automation.ui.utils.TestConfig;
+import com.personio.automation.ui.utils.TestConfig;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeDriver;
