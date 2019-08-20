@@ -84,27 +84,27 @@ public class Page {
         return new Div(getDriver(), identifier,identifierType);
     }
 
-    public Label Label(String identifier) {
-        return new Label(getDriver(), identifier);
+    public Label Label(String identifier,By.ByType identifierType) {
+        return new Label(getDriver(), identifier,identifierType);
     }
 
-    public Link Link(String identifier) {
-        return new Link(getDriver(), identifier);
+    public Link Link(String identifier,By.ByType identifierType) {
+        return new Link(getDriver(), identifier,identifierType);
     }
 
-    public Select Select(String identifier) {
-        return new Select(getDriver(), identifier);
+    public Select Select(String identifier,By.ByType identifierType) {
+        return new Select(getDriver(), identifier,identifierType);
     }
 
-    public Table Table(String identifier) {
-        return new Table(getDriver(), identifier);
+    public Table Table(String identifier,By.ByType identifierType) {
+        return new Table(getDriver(), identifier,identifierType);
     }
 
-    public TextArea TextArea(String identifier) {
-        return new TextArea(getDriver(), identifier);
+    public TextArea TextArea(String identifier,By.ByType identifierType) {
+        return new TextArea(getDriver(), identifier,identifierType);
     }
 
-    public TextField TextField(String identifier) {
-        return new TextField(getDriver(), identifier);
+    public TextField TextField(String identifier,By.ByType identifierType) {
+        return new TextField(getDriver(), identifier,identifierType);
     }
 }

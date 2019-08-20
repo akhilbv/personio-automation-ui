@@ -52,4 +52,22 @@ public class TestContext {
         }
         return dashBoard;
     }
+
+    public NavigationSideBar navigationSideBar()
+    {
+        if(navigationSideBar == null)
+        {
+            navigationSideBar = new NavigationSideBar(getBrowser().getDriver());
+        }
+        return navigationSideBar;
+    }
+
+    public SettingsPage settingsPage()
+    {
+        if (settingsPage == null)
+        {
+            settingsPage = new SettingsPage(getBrowser());
+        }
+        return settingsPage;
+    }
 }

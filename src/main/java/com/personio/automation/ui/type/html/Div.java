@@ -27,4 +27,9 @@ public class Div extends BaseHtmlElement {
     public Div(RemoteWebDriver driver, WebElement parentElement, String identifier, By.ByType identifierType) {
         super(driver, parentElement, identifier, identifierType);
     }
+
+    public RemoteWebDriver getDriver()
+    {
+        return getWebDriver();
+    }
 }

@@ -125,7 +125,7 @@ public class BaseHtmlElement {
         return this.element;
     }
 
-    public WebDriver getWebDriver() {
+    public RemoteWebDriver getWebDriver() {
         return this.driver;
     }
 
