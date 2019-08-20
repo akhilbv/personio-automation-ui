@@ -2,12 +2,14 @@ package com.personio.automation.ui.web;
 
 import com.personio.automation.ui.type.html.*;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 /*
   Provides the properties for a web page.
@@ -17,7 +19,7 @@ public class Page {
 
     private RemoteWebDriver driver;
     private int pageWaitTimeOut = 30;
-
+    private static final Logger LOGGER = Logger.getLogger("automation");
     /*
   Initialising the page properties
   */
@@ -29,6 +31,7 @@ public class Page {
             pageWait = configProperties.getString("pageWaitTimeout");
         }
         pageWaitTimeOut = Integer.parseInt(pageWait);
+        waitForAjaxAndJSToLOad();
     }
 
     private int getPageWaitTimeOut() {
@@ -38,7 +41,7 @@ public class Page {
     /*
  Wait till the execution of ajax and javascript is completed in the page
  */
-    private void waitForAjaxAndJSToLOad() {
+    protected void waitForAjaxAndJSToLOad() {
         WebDriverWait wait = new WebDriverWait(this.driver, pageWaitTimeOut);
         JavascriptExecutor javascriptExecutor = driver;
         String jsState = javascriptExecutor.executeScript("return document.readyState;").toString();
@@ -56,8 +59,13 @@ public class Page {
  Wait till the page with given title loads
  */
     protected void waitForPage(String pageTitle) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), pageWaitTimeOut);
-        wait.until(ExpectedConditions.titleContains(pageTitle));
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), pageWaitTimeOut);
+            wait.until(ExpectedConditions.titleContains(pageTitle));
+        }catch (TimeoutException ex)
+        {
+            LOGGER.warning("Expected condition failed: waiting for title to contain "+pageTitle);
+        }
     }
 
     protected RemoteWebDriver getDriver() {
@@ -72,8 +80,8 @@ public class Page {
         return new CheckBox(getDriver(), identifier);
     }
 
-    public Div Div(String identifier) {
-        return new Div(getDriver(), identifier);
+    public Div Div(String identifier, By.ByType identifierType) {
+        return new Div(getDriver(), identifier,identifierType);
     }
 
     public Label Label(String identifier) {
