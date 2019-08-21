@@ -16,8 +16,8 @@ public class CheckBox extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public CheckBox(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public CheckBox(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public CheckBox(RemoteWebDriver driver, WebElement element) {

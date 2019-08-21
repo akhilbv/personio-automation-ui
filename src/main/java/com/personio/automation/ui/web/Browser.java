@@ -2,6 +2,7 @@ package com.personio.automation.ui.web;
 
 import com.personio.automation.ui.AutomationError;
 import com.personio.automation.ui.utils.TestConfig;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -47,6 +49,7 @@ public class Browser {
             case "ANDROID":
                 desiredCapabilities.setCapability("platformName", "Android");
                 desiredCapabilities.setCapability("deviceName", this.getTestConfig().getDeviceName());
+                desiredCapabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
                 break;
             case "WINDOWS":
                 desiredCapabilities.setCapability("platformName", "Windows");

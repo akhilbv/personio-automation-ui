@@ -17,8 +17,8 @@ public class TextField extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public TextField(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public TextField(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public TextField(RemoteWebDriver driver, WebElement element) {
@@ -30,8 +30,7 @@ public class TextField extends BaseHtmlElement {
     }
 
 
-    public void clear()
-    {
+    public void clear() {
         getElement().clear();
     }
 }

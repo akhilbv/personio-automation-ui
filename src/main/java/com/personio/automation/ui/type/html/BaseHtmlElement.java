@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import static com.personio.automation.ui.web.By.by;
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.By.xpath;
 
 /*Base class for the Html elements.
@@ -69,7 +70,7 @@ public class BaseHtmlElement {
     /*
     Identifying the element based on identifier and index
      */
-    public BaseHtmlElement(RemoteWebDriver driver, String identifier, int index) {
+    public BaseHtmlElement(RemoteWebDriver driver, String identifier,By.ByType identifierType, int index) {
         this.driver = driver;
         this.identifier = identifier;
 
@@ -125,7 +126,7 @@ public class BaseHtmlElement {
         return this.element;
     }
 
-    public RemoteWebDriver getWebDriver() {
+    public RemoteWebDriver getDriver() {
         return this.driver;
     }
 
@@ -183,10 +184,10 @@ public class BaseHtmlElement {
     For clicking on the element
     */
     public void click() {
-        scrollIntoView();
         WebDriverWait clickWait = new WebDriverWait(this.driver, this.getActionWaitTimeOut());
-        clickWait.until(ExpectedConditions.elementToBeClickable(this.getElement()));
-        getElement().click();
+        this.element = clickWait.until(ExpectedConditions.presenceOfElementLocated(by(identifierType,identifier)));
+        Actions actions = new Actions(this.driver);
+        actions.moveToElement(this.element).click().perform();
     }
 
 

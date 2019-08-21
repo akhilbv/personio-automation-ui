@@ -17,8 +17,8 @@ public class Link extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public Link(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public Link(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public Link(RemoteWebDriver driver, WebElement element) {

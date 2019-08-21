@@ -17,8 +17,8 @@ public class Label extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public Label(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public Label(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public Label(RemoteWebDriver driver, WebElement element) {

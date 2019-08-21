@@ -16,8 +16,8 @@ public class Div extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public Div(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public Div(RemoteWebDriver driver, String identifier,By.ByType identifierType, int index) {
+        super(driver, identifier,identifierType, index);
     }
 
     public Div(RemoteWebDriver driver, WebElement element) {
@@ -28,8 +28,4 @@ public class Div extends BaseHtmlElement {
         super(driver, parentElement, identifier, identifierType);
     }
 
-    public RemoteWebDriver getDriver()
-    {
-        return getWebDriver();
-    }
 }

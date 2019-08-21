@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
     Properties of the html element : Table
 */
 
-public class Table extends  BaseHtmlElement{
+public class Table extends BaseHtmlElement {
     public Table(RemoteWebDriver driver, String identifier) {
         super(driver, identifier);
     }
@@ -17,8 +17,8 @@ public class Table extends  BaseHtmlElement{
         super(driver, identifier, identifierType);
     }
 
-    public Table(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public Table(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public Table(RemoteWebDriver driver, WebElement element) {

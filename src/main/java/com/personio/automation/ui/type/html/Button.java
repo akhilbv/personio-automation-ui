@@ -16,8 +16,8 @@ public class Button extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public Button(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public Button(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
+        super(driver, identifier, identifierType, index);
     }
 
     public Button(RemoteWebDriver driver, WebElement element) {

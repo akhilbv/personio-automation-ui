@@ -92,8 +92,8 @@ public class Page {
         return new Link(getDriver(), identifier,identifierType);
     }
 
-    public Select Select(String identifier,By.ByType identifierType) {
-        return new Select(getDriver(), identifier,identifierType);
+    public SelectItem Select(String identifier, By.ByType identifierType) {
+        return new SelectItem(getDriver(), identifier,identifierType);
     }
 
     public Table Table(String identifier,By.ByType identifierType) {

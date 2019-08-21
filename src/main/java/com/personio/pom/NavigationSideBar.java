@@ -18,7 +18,7 @@ public class NavigationSideBar extends Div {
 
     public void selectNavItem(String navItem)
     {
-        Link navItemLink = new Link(getDriver(),getElement(),"a[data-test-id='navsidebar-"+navItem+"']", By.ByType.CSS);
+        Link navItemLink = new Link(getDriver(),"a[data-test-id='navsidebar-"+navItem+"']", By.ByType.CSS);
         navItemLink.click();
     }
 }

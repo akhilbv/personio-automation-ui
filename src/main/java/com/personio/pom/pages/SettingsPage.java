@@ -4,9 +4,12 @@ import com.personio.automation.ui.type.html.Link;
 import com.personio.automation.ui.web.Browser;
 import com.personio.automation.ui.web.By;
 import com.personio.automation.ui.web.Page;
+import com.personio.pom.SubPages.OnBoardingPage;
 
 
 public class SettingsPage extends Page {
+    private OnBoardingPage onBoardingPage;
+
     public SettingsPage(Browser browser) {
         super(browser);
         waitForPage("Settings");
@@ -17,5 +20,10 @@ public class SettingsPage extends Page {
         settingsItemLink.click();
     }
 
-
+    public OnBoardingPage onBoardingPage() {
+        if (onBoardingPage == null) {
+            onBoardingPage = new OnBoardingPage(getDriver());
+        }
+        return onBoardingPage;
+    }
 }

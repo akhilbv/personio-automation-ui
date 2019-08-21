@@ -17,8 +17,8 @@ public class TextArea extends BaseHtmlElement {
         super(driver, identifier, identifierType);
     }
 
-    public TextArea(RemoteWebDriver driver, String identifier, int index) {
-        super(driver, identifier, index);
+    public TextArea(RemoteWebDriver driver, String identifier,By.ByType identifierType, int index) {
+        super(driver, identifier,identifierType, index);
     }
 
     public TextArea(RemoteWebDriver driver, WebElement element) {
