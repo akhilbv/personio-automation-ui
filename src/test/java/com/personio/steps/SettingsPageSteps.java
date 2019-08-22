@@ -21,4 +21,9 @@ public class SettingsPageSteps extends TestContext {
     public void iSelectSettings(String settingsItem) {
         settingsPage().selectSettings(settingsItem);
     }
+
+    @Then("^Success message should be displayed$")
+    public void statusMessageDisplay() {
+        Assert.assertTrue(settingsPage().statusMessage().isVisible());
+    }
 }

@@ -1,9 +1,9 @@
 package com.personio.steps;
 
-import com.personio.automation.ui.context.TestContext;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.junit.Assert;
+        import com.personio.automation.ui.context.TestContext;
+        import cucumber.api.java.en.Then;
+        import cucumber.api.java.en.When;
+        import org.junit.Assert;
 
 public class OnBoardingPageSteps extends TestContext {
     @Then("^Onboarding page should be loaded$")
@@ -53,15 +53,30 @@ public class OnBoardingPageSteps extends TestContext {
         settingsPage().onBoardingPage().onBoardingStepsTab().itemType().selectByVisibleText(itemType);
         iClickOnCreate();
     }
-    @Then("^\"([^\"]*)\" should be displayed in the row \"([^\"]*)\" of \"([^\"]*)\" step$")
-    public void itemShouldDisplay(String itemType,int index,String stepName) {
-        boolean isVisible=false;
-        switch (itemType) {
-            case "textarea":
-               isVisible =  settingsPage().onBoardingPage().onBoardingStepsTab().stepItemTextArea(index,stepName).isVisible();
-               break;
-        }
+
+    @Then("^\"([^\"]*)\" should be displayed in the \"([^\"]*)\" row of step items$")
+    public void itemShouldDisplay(String itemType, int index) {
+        boolean isVisible = false;
+        isVisible = settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().containsRowAtIndexWithTag(index, itemType);
         Assert.assertTrue(isVisible);
     }
+
+    @When("^I set the value \"([^\"]*)\" to the field \"([^\"]*)\" in the \"([^\"]*)\" row of step items$")
+    public void iSetValueToField(String valueToBeSet, String itemType, int index) {
+        settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().setValueToFieldAtRowIndex(valueToBeSet, index, itemType);
+    }
+
+    @Then("^The field \"([^\"]*)\" in the \"([^\"]*)\" row of step items has value \"([^\"]*)\"$")
+    public void fieldAtRowHasValue(String itemType, int index,String expectedValue) {
+      String actualFieldValue =  settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().getRowFieldValue(index, itemType);
+      Assert.assertEquals(expectedValue,actualFieldValue);
+    }
+
+    @When("^I Save the onboarding steps$")
+    public void iSaveStepChanges()
+    {
+        settingsPage().onBoardingPage().onBoardingStepsTab().saveChanges().click();
+    }
+
 
 }

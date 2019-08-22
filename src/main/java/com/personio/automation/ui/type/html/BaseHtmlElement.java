@@ -70,7 +70,7 @@ public class BaseHtmlElement {
     /*
     Identifying the element based on identifier and index
      */
-    public BaseHtmlElement(RemoteWebDriver driver, String identifier,By.ByType identifierType, int index) {
+    public BaseHtmlElement(RemoteWebDriver driver, String identifier, By.ByType identifierType, int index) {
         this.driver = driver;
         this.identifier = identifier;
 
@@ -150,9 +150,16 @@ public class BaseHtmlElement {
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    /*For scroll to the top
+     */
+    public void scrollToTop() {
+        JavascriptExecutor javascriptExecutor = driver;
+        javascriptExecutor.executeScript(" window.scrollTo(0,0)");
+    }
+
     /*
-    For entering text to an element
-    */
+   For entering text to an element
+   */
     public void sendKeys(String textTobeEnter) {
         waitForVisibility();
         scrollIntoView();
@@ -184,10 +191,17 @@ public class BaseHtmlElement {
     For clicking on the element
     */
     public void click() {
-        WebDriverWait clickWait = new WebDriverWait(this.driver, this.getActionWaitTimeOut());
-        this.element = clickWait.until(ExpectedConditions.presenceOfElementLocated(by(identifierType,identifier)));
-        Actions actions = new Actions(this.driver);
-        actions.moveToElement(this.element).click().perform();
+        scrollToTop();
+        try {
+            this.getElement().click();
+        } catch (Exception ex) {
+            if (ex.getMessage().contains("is not clickable at point")) {
+                WebDriverWait clickWait = new WebDriverWait(this.driver, this.getActionWaitTimeOut());
+                this.element = clickWait.until(ExpectedConditions.elementToBeClickable(by(identifierType, identifier)));
+                Actions actions = new Actions(this.driver);
+                actions.moveToElement(getElement()).click().build().perform();
+            }
+        }
     }
 
 

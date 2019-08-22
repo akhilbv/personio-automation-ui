@@ -1,17 +1,17 @@
 package com.personio.pom.tabs;
 
-        import com.personio.automation.ui.type.html.*;
-        import com.personio.automation.ui.web.By;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.remote.RemoteWebDriver;
-        import org.openqa.selenium.support.ui.Select;
+import com.personio.automation.ui.type.html.*;
+import com.personio.automation.ui.web.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /*Properties of On boarding steps page
  */
 public class OnBoardingStepsTab extends Div {
 
     public OnBoardingStepsTab(RemoteWebDriver driver) {
-        super(driver, "tab-pane.active", By.ByType.CSS);
+        super(driver, "div.tab-pane.active", By.ByType.CSS);
     }
 
     public TextField stepName() {
@@ -27,7 +27,7 @@ public class OnBoardingStepsTab extends Div {
     }
 
     public Link addItemLink() {
-        return new Link(getDriver(), getElement(), "a[href='#modal-add-item']", By.ByType.CSS);
+        return new Link(getDriver(), getElement(), "div.block-section.tab-pane.active a[href='#modal-add-item']", By.ByType.CSS);
     }
 
     public ModalDialogue addStepDialogue() {
@@ -39,7 +39,11 @@ public class OnBoardingStepsTab extends Div {
         return new Select(select);
     }
 
-    public TextArea stepItemTextArea(int index,String stepName) {
-        return new TextArea (getDriver(), "//div[./h4[contains(text(), '" + stepName + "')]]//textarea", By.ByType.Xpath, index);
+    public Table stepItemsTable() {
+        return new Table(getDriver(), getElement(), "//div[@class='block-section tab-pane active']//table/tbody", By.ByType.Xpath);
+    }
+
+    public Button saveChanges() {
+        return new Button(getDriver(), getElement(), "div.block-section.tab-pane.active button.btn.btn-sm.btn-primary", By.ByType.CSS);
     }
 }

@@ -1,5 +1,6 @@
 package com.personio.pom.pages;
 
+import com.personio.automation.ui.type.html.Div;
 import com.personio.automation.ui.type.html.Link;
 import com.personio.automation.ui.web.Browser;
 import com.personio.automation.ui.web.By;
@@ -13,6 +14,10 @@ public class SettingsPage extends Page {
     public SettingsPage(Browser browser) {
         super(browser);
         waitForPage("Settings");
+    }
+
+    public Div statusMessage() {
+        return new Div(getDriver(), "div#errorMessages div.alert.alert-success", By.ByType.CSS);
     }
 
     public void selectSettings(String settingsItem) {

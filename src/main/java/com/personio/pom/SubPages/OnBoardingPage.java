@@ -11,8 +11,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  */
 public class OnBoardingPage extends Div {
 
-    private OnBoardingStepsTab onBoardingStepsTab;
-
     public OnBoardingPage(RemoteWebDriver driver) {
         super(driver, "employee_details_tab", By.ByType.Id);
     }
@@ -22,9 +20,6 @@ public class OnBoardingPage extends Div {
     }
 
     public OnBoardingStepsTab onBoardingStepsTab() {
-        if (onBoardingStepsTab == null) {
-            onBoardingStepsTab = new OnBoardingStepsTab(getDriver());
-        }
-        return onBoardingStepsTab;
+      return new OnBoardingStepsTab(getDriver());
     }
 }

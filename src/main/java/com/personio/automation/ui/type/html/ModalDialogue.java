@@ -43,7 +43,7 @@ public class ModalDialogue extends Div {
     }
 
     public void accept() {
-        new Button(getDriver(), getElement(), "button.btn.btn-primary", By.ByType.CSS).click();
+        new Button(getDriver(), getElement(),"button.btn.btn-primary", By.ByType.CSS).getElement().click();
     }
 
     public Div dialogueContent() {
