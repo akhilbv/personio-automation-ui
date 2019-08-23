@@ -115,7 +115,7 @@ public class Browser {
             } else {
                 File file = new File(System.getProperty("user.dir") + File.separator + "libs" + File.separator + "geckodriver.exe");
                 System.setProperty("webdriver.gecko.driver", file.getAbsolutePath());
-                this.driver = new FirefoxDriver();
+                this.driver = new FirefoxDriver(firefoxOptions);
             }
         } catch (Exception ex) {
             throw new AssertionError("Unable to start firefox driver : " + ex.getMessage());
@@ -138,7 +138,7 @@ public class Browser {
                 this.driver = new InternetExplorerDriver();
             }
         } catch (Exception ex) {
-            throw new AssertionError("Unable to start firefox driver : " + ex.getMessage());
+            throw new AssertionError("Unable to start Ie driver : " + ex.getMessage());
         }
     }
 

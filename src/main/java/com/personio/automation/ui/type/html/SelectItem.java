@@ -32,7 +32,7 @@ public class SelectItem extends BaseHtmlElement {
 
     public void selectItem(String itemToSelect)
     {
-       Select dropDown =  (Select) getElement();
+       Select dropDown =  new Select(getElement());
        dropDown.selectByVisibleText(itemToSelect);
     }
 }

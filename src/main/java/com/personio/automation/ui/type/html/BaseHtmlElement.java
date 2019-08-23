@@ -212,7 +212,7 @@ public class BaseHtmlElement {
         return elementId;
     }
 
-    public String getValue() {
+    public String getText() {
         return getElement().getText();
     }
 

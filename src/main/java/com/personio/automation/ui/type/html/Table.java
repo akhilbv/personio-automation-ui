@@ -4,6 +4,7 @@ import com.personio.automation.ui.web.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Objects;
@@ -59,6 +60,25 @@ public class Table extends BaseHtmlElement {
             return element.getAttribute("value");
         }
         return element.getText();
+    }
+
+    public String getCellFieldValue(int rowIndex, int columnIndex ,String tagname) {
+        List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
+        List<WebElement> tableColumns = tableRows.get(rowIndex).findElements(by(By.ByType.Xpath, "td"));
+        WebElement element = tableColumns.get(columnIndex).findElement(by(By.ByType.Xpath,".//"+tagname));
+        if (tagname.contains("input") && element.getText().isEmpty()) {
+            return element.getAttribute("value");
+        } else if (tagname.contains("select")) {
+            return new Select(element).getFirstSelectedOption().getText();
+        }
+        return element.getText();
+    }
+
+    public String getCellValue(int rowIndex, int columnIndex) {
+        List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
+        List<WebElement> tableColumns = tableRows.get(rowIndex).findElements(by(By.ByType.Xpath, "td"));
+
+        return tableColumns.get(columnIndex).getText();
     }
 }
 
