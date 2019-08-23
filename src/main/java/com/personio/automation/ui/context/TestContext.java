@@ -3,6 +3,7 @@ package com.personio.automation.ui.context;
 import com.personio.automation.ui.web.Browser;
 import com.personio.pom.NavigationSideBar;
 import com.personio.pom.pages.DashBoard;
+import com.personio.pom.pages.EmployeesPage;
 import com.personio.pom.pages.LoginPage;
 import com.personio.pom.pages.SettingsPage;
 
@@ -16,6 +17,7 @@ public class TestContext {
     private LoginPage loginPage;
     private NavigationSideBar navigationSideBar;
     private SettingsPage settingsPage;
+    private EmployeesPage employeesPage;
 
     // initialising the browser session if test context is not initialised with browser
     public TestContext() {
@@ -69,5 +71,14 @@ public class TestContext {
             settingsPage = new SettingsPage(getBrowser());
         }
         return settingsPage;
+    }
+
+    public EmployeesPage employeesPage()
+    {
+        if (employeesPage == null)
+        {
+            employeesPage = new EmployeesPage(getBrowser());
+        }
+        return employeesPage;
     }
 }
