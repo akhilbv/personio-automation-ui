@@ -5,6 +5,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+/*
+Step definitions for onboarding templates
+ */
 public class OnboardingTemplateSteps extends TestContext {
 
     @When("^I add a new onboarding template \"([^\"]*)\"$")
@@ -50,4 +53,20 @@ public class OnboardingTemplateSteps extends TestContext {
         settingsPage().onBoardingPage().onBoardingTemplateTab().deadlineDirection().selectItem(direction);
     }
 
+    @Then("^Step list contains the step \"([^\"]*)\" at row \"([^\"]*)\" and column \"([^\"]*)\"")
+    public void stepTableContains(String expectedSteName, int rowIndex, int columnIndex) {
+        String actualStepName = settingsPage().onBoardingPage().onBoardingTemplateTab().addedSteps().getCellValue(rowIndex, columnIndex);
+        Assert.assertEquals(expectedSteName, actualStepName);
+    }
+
+    @Then("The field \"([^\"]*)\" at row \"([^\"]*)\" and column \"([^\"]*)\" of step lists has value \"([^\"]*)\"")
+    public void stepTableContains(String tagName, int rowIndex, int columnIndex, String expectedValue) {
+        String actualValue = settingsPage().onBoardingPage().onBoardingTemplateTab().addedSteps().getCellFieldValue(rowIndex, columnIndex,tagName);
+        Assert.assertEquals(expectedValue, actualValue);
+    }
+
+    @Then("^I click on the create button of steps to template dialogue")
+    public void iClickOnCreate() {
+        settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().accept();
+    }
 }

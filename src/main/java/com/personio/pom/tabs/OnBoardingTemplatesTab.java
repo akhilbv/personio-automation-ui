@@ -45,4 +45,9 @@ public class OnBoardingTemplatesTab extends Div {
     public SelectItem deadlineDirection() {
         return new SelectItem(getDriver(), "offset_direction", By.ByType.Name);
     }
+
+    public Table addedSteps()
+    {
+        return new Table(getDriver(),getElement(),"div.block-section.tab-pane.active table tbody", By.ByType.CSS);
+    }
 }

@@ -5,6 +5,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+/*
+Step definitions for on boarding
+ */
+
 public class OnBoardingPageSteps extends TestContext {
     @Then("^Onboarding page should be loaded$")
     public void settingsPageLoaded() {
@@ -46,7 +50,7 @@ public class OnBoardingPageSteps extends TestContext {
         Assert.assertEquals("Expected dialogue header: Add item to step, but was " + header, "Add item to step", header);
     }
 
-    @Then("^I click on the create button$")
+    @Then("^I click on the create button of add items to step dialogue$")
     public void iClickOnCreate() {
         settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().accept();
     }

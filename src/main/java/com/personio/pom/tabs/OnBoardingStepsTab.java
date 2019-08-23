@@ -42,7 +42,7 @@ public class OnBoardingStepsTab extends Div {
     }
 
     public Table stepItemsTable() {
-        return new Table(getDriver(), getElement(), "//div[@class='block-section tab-pane active']//table/tbody", By.ByType.Xpath);
+        return new Table(getDriver(), getElement(), "div.block-section.tab-pane.active table tbody", By.ByType.CSS);
     }
 
     public Button saveChanges() {
