@@ -1,10 +1,12 @@
 package com.personio.pom.SubPages;
 
+import com.personio.automation.ui.type.html.Button;
 import com.personio.automation.ui.type.html.Div;
 
 import com.personio.automation.ui.type.html.ListItem;
 import com.personio.automation.ui.web.By;
 import com.personio.pom.tabs.OnBoardingStepsTab;
+import com.personio.pom.tabs.OnBoardingTemplatesTab;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 /* Properties for on boarding page
@@ -16,10 +18,14 @@ public class OnBoardingPage extends Div {
     }
 
     public ListItem Tab(String tabName) {
-        return new ListItem(getDriver(), getElement(), "//li/a[contains(text(),'" + tabName + "')]", By.ByType.Xpath);
+        return new ListItem(getDriver(), "//li/a[contains(text(),'" + tabName + "')]", By.ByType.Xpath);
     }
 
     public OnBoardingStepsTab onBoardingStepsTab() {
-      return new OnBoardingStepsTab(getDriver());
+        return new OnBoardingStepsTab(getDriver());
+    }
+
+    public OnBoardingTemplatesTab onBoardingTemplateTab() {
+        return new OnBoardingTemplatesTab(getDriver());
     }
 }

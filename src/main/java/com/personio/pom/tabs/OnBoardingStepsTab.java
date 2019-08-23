@@ -33,7 +33,9 @@ public class OnBoardingStepsTab extends Div {
     public ModalDialogue addStepDialogue() {
         return new ModalDialogue(getDriver(), "div#modal-add-item div.modal-content", By.ByType.CSS);
     }
-
+    public ModalDialogue dialogue() {
+        return new ModalDialogue(getDriver(), "div.modal-content", By.ByType.CSS);
+    }
     public Select itemType() {
         WebElement select = new SelectItem(getDriver(), "item_type", By.ByType.Name).getElement();
         return new Select(select);

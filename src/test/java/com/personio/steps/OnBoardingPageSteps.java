@@ -1,20 +1,22 @@
 package com.personio.steps;
 
-        import com.personio.automation.ui.context.TestContext;
-        import cucumber.api.java.en.Then;
-        import cucumber.api.java.en.When;
-        import org.junit.Assert;
+import com.personio.automation.ui.context.TestContext;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.junit.Assert;
 
 public class OnBoardingPageSteps extends TestContext {
     @Then("^Onboarding page should be loaded$")
     public void settingsPageLoaded() {
         boolean isPageVisible = settingsPage().onBoardingPage().isVisible();
         Assert.assertEquals("Expected onboarding page to be displayed ", true, isPageVisible);
+        settingsPage().waitForAjaxAndJSToLOad();
     }
 
     @When("^I select the \"([^\"]*)\" tab from Onboarding page$")
     public void iSelectOnboardTab(String tabName) {
         settingsPage().onBoardingPage().Tab(tabName).click();
+        settingsPage().waitForAjaxAndJSToLOad();
     }
 
     @When("^I add a new onboarding step \"([^\"]*)\"$")
@@ -29,18 +31,19 @@ public class OnBoardingPageSteps extends TestContext {
         Assert.assertEquals("Created step " + stepName + " is not present in the step list ", true, isStepPresent);
     }
 
-    @When("^I click on the Add item link$")
+    @When("^I click on the Add item link in onboarding steps tab$")
     public void iClickAddItem() {
         settingsPage().onBoardingPage().onBoardingStepsTab().addItemLink().click();
+        settingsPage().waitForAjaxAndJSToLOad();
     }
 
-    @Then("^\"([^\"]*)\" dialogue should be displayed$")
-    public void dialogueDisplay(String dialogueHeader) {
+    @Then("^Add item to step dialogue should be displayed$")
+    public void dialogueDisplay() {
         boolean isDialogueVisible = settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().isVisible();
-        Assert.assertEquals(dialogueHeader + " dialogue is not visible", true, isDialogueVisible);
+        Assert.assertEquals("Add item to step dialogue is not visible", true, isDialogueVisible);
 
         String header = settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().getHeader();
-        Assert.assertEquals("Expected dialogue header " + dialogueHeader + "but was " + header, dialogueHeader, header);
+        Assert.assertEquals("Expected dialogue header: Add item to step, but was " + header, "Add item to step", header);
     }
 
     @Then("^I click on the create button$")
@@ -67,14 +70,13 @@ public class OnBoardingPageSteps extends TestContext {
     }
 
     @Then("^The field \"([^\"]*)\" in the \"([^\"]*)\" row of step items has value \"([^\"]*)\"$")
-    public void fieldAtRowHasValue(String itemType, int index,String expectedValue) {
-      String actualFieldValue =  settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().getRowFieldValue(index, itemType);
-      Assert.assertEquals(expectedValue,actualFieldValue);
+    public void fieldAtRowHasValue(String itemType, int index, String expectedValue) {
+        String actualFieldValue = settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().getRowFieldValue(index, itemType);
+        Assert.assertEquals(expectedValue, actualFieldValue);
     }
 
     @When("^I Save the onboarding steps$")
-    public void iSaveStepChanges()
-    {
+    public void iSaveStepChanges() {
         settingsPage().onBoardingPage().onBoardingStepsTab().saveChanges().click();
     }
 
