@@ -50,9 +50,37 @@ Feature: Onboarding
     Then "Onboarding Templates" tab should be selected
     When I add a new onboarding template "An Onboarding Template"
     Then template "An Onboarding Template" should be listed in the template list
+
     When I click on the Add step link in onboarding templates tab
     Then Add step to template dialogue should be displayed
     And I select the step "An Onboarding Step" from the step list
     And I select the responsible "Employee" from the response list
-    And I add deadline as "2" days "after hire"
+    And I add deadline as "2" days after hire
+    When I click on the create button of steps to template dialogue
+    Then Success message should be displayed
+    Then Step list contains the step "An Onboarding Step" at row "0" and column "1"
+    And The field "select" at row "0" and column "2" of step lists has value "Employee"
+    And The field "input" at row "0" and column "3" of step lists has value "2"
+    And The field "select" at row "0" and column "3" of step lists has value "after hire"
+
+    When I Save the onboarding steps
+    Then Success message should be displayed
+
+    When I click on the employees link in the navigation bar
+    Then Employees page should be loaded
+    When I search for the employee "akhilbabuv@gmail.com"
+    And I select the profile of employee "Akhil"
+    Then Profile page of employee "Akhil Babu V" should be loaded
+    Then I select the profile tab "Onboarding"
+    When I assign the template "An Onboarding Template" to employee
+    Then Success message should be displayed
+    And Template "An Onboarding Template" should be listed under to do
+
+
+
+
+
+
+
+
 

@@ -16,9 +16,10 @@ public class NavigationSideBar extends Div {
         return new Link(getDriver(), "a[data-test-id='navsidebar-settings']", By.ByType.CSS);
     }
 
-    public void selectNavItem(String navItem)
-    {
-        Link navItemLink = new Link(getDriver(),"a[data-test-id='navsidebar-"+navItem+"']", By.ByType.CSS);
+    public void selectNavItem(String navItem) {
+        Link navItemLink = new Link(getDriver(), "a[data-test-id='navsidebar-" + navItem + "']", By.ByType.CSS);
+        navItemLink.waitForVisibility();
+        
         navItemLink.click();
     }
 }
