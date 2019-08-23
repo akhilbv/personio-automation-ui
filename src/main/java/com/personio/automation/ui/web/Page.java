@@ -41,7 +41,7 @@ public class Page {
     /*
  Wait till the execution of ajax and javascript is completed in the page
  */
-    protected void waitForAjaxAndJSToLOad() {
+    public void waitForAjaxAndJSToLOad() {
         WebDriverWait wait = new WebDriverWait(this.driver, pageWaitTimeOut);
         JavascriptExecutor javascriptExecutor = driver;
         String jsState = javascriptExecutor.executeScript("return document.readyState;").toString();
@@ -51,7 +51,7 @@ public class Page {
 
         String activeAjax = javascriptExecutor.executeScript(" return jQuery.active;").toString();
         if (!"0".equals(activeAjax)) {
-            wait.until((ExpectedCondition<Boolean>) waitDriver -> ("0".equals(javascriptExecutor.executeScript(" return jQuery.active;"))));
+            wait.until((ExpectedCondition<Boolean>) waitDriver -> ("0".equals(javascriptExecutor.executeScript(" return jQuery.active;").toString())));
         }
     }
 

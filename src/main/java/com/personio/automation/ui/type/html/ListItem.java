@@ -1,14 +1,18 @@
 package com.personio.automation.ui.type.html;
 
-        import com.personio.automation.ui.web.By;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.remote.RemoteWebDriver;
+import com.personio.automation.ui.web.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-        import java.util.List;
-        import java.util.NoSuchElementException;
-        import java.util.Objects;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
-        import static com.personio.automation.ui.web.By.by;
+import static com.personio.automation.ui.web.By.by;
+
+/*
+    Properties of the html element : List
+*/
 
 public class ListItem extends BaseHtmlElement {
     public ListItem(RemoteWebDriver driver, String identifier) {
