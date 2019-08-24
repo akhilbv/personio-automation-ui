@@ -42,8 +42,8 @@ Connect an android device and update the device name
 Steps To Execute Tests:
 Open the command prompt from the project root folder
 Execute command "gradle build" for running the entire test suite
-Execute command "gradle clean assemble -DTags_TO_Be_RUN='add scenario tag here' executeTest" for executing scenarios based on tags
-eg: gradle clean assemble -DTags_TO_Be_RUN="@smoketest" executeTests
+Execute command "gradle clean assemble -DTAGS_TO_BE_RUN='add scenario tag here' executeTest" for executing scenarios based on tags
+eg: gradle clean assemble -DTAGS_TO_BE_RUN="@smoketest" executeTests
 
 Test execution results will be stored under ./test-results/cucumber-reports/report.html
 
