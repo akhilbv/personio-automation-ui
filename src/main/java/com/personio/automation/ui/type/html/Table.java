@@ -36,6 +36,9 @@ public class Table extends BaseHtmlElement {
         super(driver, parentElement, identifier, identifierType);
     }
 
+    /*
+    Checks whether a table row contains an html element with provided tag name
+     */
     public boolean containsRowAtIndexWithTag(int rowIndex, String tagname) {
         List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
         try {
@@ -46,6 +49,9 @@ public class Table extends BaseHtmlElement {
         }
     }
 
+    /*
+     Set text value of field at provided row
+     */
     public void setValueToFieldAtRowIndex(String valueToBeSet, int rowIndex, String tagname) {
         List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
         WebElement element = tableRows.get(rowIndex).findElement(by(By.ByType.Xpath, "td/" + tagname + ""));
@@ -53,6 +59,9 @@ public class Table extends BaseHtmlElement {
         element.sendKeys(valueToBeSet);
     }
 
+    /*
+    returns the child html element text value of a row field at index
+     */
     public String getRowFieldValue(int rowIndex, String tagname) {
         List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
         WebElement element = tableRows.get(rowIndex).findElement(by(By.ByType.Xpath, "td/" + tagname + ""));
@@ -62,10 +71,12 @@ public class Table extends BaseHtmlElement {
         return element.getText();
     }
 
-    public String getCellFieldValue(int rowIndex, int columnIndex ,String tagname) {
+    /* returns the text value of a html element in a table cell
+     */
+    public String getCellFieldValue(int rowIndex, int columnIndex, String tagname) {
         List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
         List<WebElement> tableColumns = tableRows.get(rowIndex).findElements(by(By.ByType.Xpath, "td"));
-        WebElement element = tableColumns.get(columnIndex).findElement(by(By.ByType.Xpath,".//"+tagname));
+        WebElement element = tableColumns.get(columnIndex).findElement(by(By.ByType.Xpath, ".//" + tagname));
         if (tagname.contains("input") && element.getText().isEmpty()) {
             return element.getAttribute("value");
         } else if (tagname.contains("select")) {
@@ -74,6 +85,8 @@ public class Table extends BaseHtmlElement {
         return element.getText();
     }
 
+    /* returns the text value of a table cell
+     */
     public String getCellValue(int rowIndex, int columnIndex) {
         List<WebElement> tableRows = getElement().findElements(by(By.ByType.TagName, "tr"));
         List<WebElement> tableColumns = tableRows.get(rowIndex).findElements(by(By.ByType.Xpath, "td"));

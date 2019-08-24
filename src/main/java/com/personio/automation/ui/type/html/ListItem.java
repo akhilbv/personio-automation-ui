@@ -35,6 +35,9 @@ public class ListItem extends BaseHtmlElement {
         super(driver, parentElement, identifier, identifierType);
     }
 
+    /*
+        Identifying an list item based on the provided text
+     */
     public WebElement getListItem(String itemName) {
         List<WebElement> listItems = getElement().findElements(by(By.ByType.TagName, "li"));
         return listItems.stream()
@@ -43,6 +46,8 @@ public class ListItem extends BaseHtmlElement {
                 .orElseThrow(() -> new NoSuchElementException("No WebElement found containing " + itemName));
     }
 
+    /*Checks the presence of list item based on the provided text
+     */
     public boolean contains(String itemName) {
         List<WebElement> listItems = getElement().findElements(by(By.ByType.TagName, "li"));
         return !listItems.stream().filter(webElement ->

@@ -17,6 +17,7 @@ public class LoginPage extends Page {
     public LoginPage(Browser browser) {
         super(browser);
         waitForPage("Personio");
+        waitForAjaxAndJSToLOad();
     }
 
     private TextField userName() {
