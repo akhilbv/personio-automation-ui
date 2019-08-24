@@ -1,15 +1,16 @@
 package com.personio.automation.ui.web;
 
 import com.personio.automation.ui.type.html.*;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 import java.util.logging.Logger;
+
+import static com.personio.automation.ui.web.By.by;
 
 /*
   Provides the properties for a web page.
@@ -56,6 +57,27 @@ public class Page {
     }
 
     /*
+wait for the element until timeout
+*/
+    public void waitForElement(By.ByType identifierType,String identifier) {
+        WebDriverWait elementWait = new WebDriverWait(getDriver(),pageWaitTimeOut);
+        elementWait.until(ExpectedConditions.presenceOfElementLocated(by(identifierType,identifier)));
+
+        Function<RemoteWebDriver,Boolean> isElementEnabled = driver -> driver.findElement(by(identifierType, identifier)).isEnabled();
+        try {
+            if(!isElementEnabled.apply(getDriver())){
+                FluentWait<RemoteWebDriver> wait = new FluentWait<>(getDriver())
+                        .pollingEvery(Duration.ofSeconds(2))
+                        .withTimeout(Duration.ofSeconds(pageWaitTimeOut))
+                        .ignoring(NoSuchElementException.class);
+                wait.until(isElementEnabled);
+            }
+        } catch (TimeoutException ex) {
+            LOGGER.warning("Expected condition failed: waiting for the element " + identifier);
+        }
+    }
+
+    /*
  Wait till the page with given title loads
  */
     protected void waitForPage(String pageTitle) {
@@ -67,6 +89,7 @@ public class Page {
             LOGGER.warning("Expected condition failed: waiting for title to contain "+pageTitle);
         }
     }
+
 
     protected RemoteWebDriver getDriver() {
         return this.driver;

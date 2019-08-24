@@ -5,6 +5,7 @@ import com.personio.automation.ui.utils.TestConfig;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -47,9 +48,10 @@ public class Browser {
 
         switch (this.platform.toUpperCase()) {
             case "ANDROID":
-                desiredCapabilities.setCapability("platformName", "Android");
+                desiredCapabilities.setPlatform(Platform.ANDROID);
                 desiredCapabilities.setCapability("deviceName", this.getTestConfig().getDeviceName());
                 desiredCapabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
+                desiredCapabilities.setCapability("platformName", "Android");
                 break;
             case "WINDOWS":
                 desiredCapabilities.setCapability("platformName", "Windows");

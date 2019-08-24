@@ -11,6 +11,8 @@ import com.personio.automation.ui.web.Page;
 public class EmployeeProfilePage extends Page {
     public EmployeeProfilePage(Browser browser) {
         super(browser);
+        waitForAjaxAndJSToLOad();
+        waitForElement(By.ByType.Id,"profile-headline");
     }
 
     public Div profileHeadLine() {
@@ -23,7 +25,7 @@ public class EmployeeProfilePage extends Page {
 
     public void assignTemplate(String templateName) {
         Link templateLink = new Link(getDriver(), templateName, By.ByType.linkText);
-        if (templateLink == null || !templateLink.isVisible()) {
+        if (templateLink == null || !templateLink.isEnabled()) {
             Link assignTemplate = new Link(getDriver(), "Assign new onboarding template", By.ByType.linkText);
             if (assignTemplate != null) {
                 assignTemplate.click();

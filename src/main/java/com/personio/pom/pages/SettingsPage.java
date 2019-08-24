@@ -9,7 +9,6 @@ import com.personio.pom.SubPages.OnBoardingPage;
 
 
 public class SettingsPage extends Page {
-    private OnBoardingPage onBoardingPage;
 
     public SettingsPage(Browser browser) {
         super(browser);
@@ -26,9 +25,6 @@ public class SettingsPage extends Page {
     }
 
     public OnBoardingPage onBoardingPage() {
-        if (onBoardingPage == null) {
-            onBoardingPage = new OnBoardingPage(getDriver());
-        }
-        return onBoardingPage;
+           return new OnBoardingPage(getDriver());
     }
 }

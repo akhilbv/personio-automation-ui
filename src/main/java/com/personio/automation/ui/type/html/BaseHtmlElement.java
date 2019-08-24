@@ -1,18 +1,19 @@
 package com.personio.automation.ui.type.html;
 
 import com.personio.automation.ui.web.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import static com.personio.automation.ui.web.By.by;
@@ -225,11 +226,11 @@ public class BaseHtmlElement {
     }
 
     /*
-   returns whether a field is visible or not
+   returns whether a field is enabled or not
    */
-    public boolean isVisible() {
+    public boolean isEnabled() {
         if (this.element != null)
-            return element.isDisplayed();
+            return element.isEnabled();
         else
             return false;
     }
@@ -252,6 +253,10 @@ public class BaseHtmlElement {
     public void waitForVisibility() {
         try {
             WebDriverWait wait = new WebDriverWait(this.driver, this.elementWaitTimeout);
+            if (getDriver().getCapabilities().getPlatform().toString().equalsIgnoreCase("android")) {
+                this.element = wait.until(ExpectedConditions.presenceOfElementLocated(By.by(identifierType, identifier)));
+                return;
+            }
             this.element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.by(identifierType, identifier)));
         } catch (NullPointerException | NoSuchElementException ex) {
             throw new AssertionError("Element not visible within " + elementWaitTimeout + " seconds");
