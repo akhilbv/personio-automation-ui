@@ -12,6 +12,7 @@ public class EmployeeProfilePageSteps extends TestContext {
     @Then("^Profile page of employee \"([^\"]*)\" should be loaded$")
     public void employeeProfilePageLoaded(String employeeName) {
         employeesPage().waitForAjaxAndJSToLOad();
+        employeesPage().employeeProfilePage().profileHeadLine().waitForVisibility();
         employeesPage().employeeProfilePage().profileHeadLine().click();
 
         String actualEmployeeName = employeesPage().employeeProfilePage().profileHeadLine().getText();

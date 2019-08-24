@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.personio.automation.ui.web.By.by;
 
@@ -52,5 +53,12 @@ public class ListItem extends BaseHtmlElement {
         List<WebElement> listItems = getElement().findElements(by(By.ByType.TagName, "li"));
         return !listItems.stream().filter(webElement ->
                 Objects.equals(webElement.getText(), itemName)).findFirst().isEmpty();
+    }
+
+    public List getListItems(String itemName) {
+        List<WebElement> listItems = getElement().findElements(by(By.ByType.TagName, "li"));
+        return listItems.stream()
+                .filter(webElement -> Objects.equals(webElement.getText(), itemName))
+                .collect(Collectors.toList());
     }
 }

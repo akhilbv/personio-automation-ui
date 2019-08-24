@@ -34,16 +34,20 @@ public class ModalDialogue extends Div {
         return getElement().findElement(by(By.ByType.CSS, "h4.modal-title")).getText();
     }
 
-    public void close() {
-        new Button(getDriver(), getElement(), "button.close", By.ByType.CSS).click();
+    public Button close() {
+        return new Button(getDriver(), getElement(), "button.close", By.ByType.CSS);
     }
 
-    public void cancel() {
-        new Button(getDriver(), getElement(), "button.btn.btn-default", By.ByType.CSS).click();
+    public Button cancel() {
+        return new Button(getDriver(), getElement(), "button.btn.btn-default", By.ByType.CSS);
     }
 
-    public void accept() {
-        new Button(getDriver(), getElement(),"button.btn.btn-primary", By.ByType.CSS).getElement().click();
+    public Button create() {
+        return new Button(getDriver(), getElement(), "button.btn.btn-primary", By.ByType.CSS);
+    }
+
+    public Button delete() {
+        return new Button(getDriver(), getElement(), "button.btn.btn-danger", By.ByType.CSS);
     }
 
     public Div dialogueContent() {

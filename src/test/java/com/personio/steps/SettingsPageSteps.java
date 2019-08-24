@@ -12,7 +12,7 @@ Step definition for Settings page
 public class SettingsPageSteps extends TestContext {
     @Then("^Settings page should be loaded$")
     public void settingsPageLoaded() {
-        boolean isLabelVisible = settingsPage().Label("//strong[text()='Settings']", By.ByType.Xpath).isVisible();
+        boolean isLabelVisible = settingsPage().Label("//strong[text()='Settings']", By.ByType.Xpath).isEnabled();
         Assert.assertEquals("Expected label settings to be displayed ", true, isLabelVisible);
     }
 
@@ -24,6 +24,6 @@ public class SettingsPageSteps extends TestContext {
 
     @Then("^Success message should be displayed$")
     public void statusMessageDisplay() {
-        Assert.assertTrue(settingsPage().statusMessage().isVisible());
+        Assert.assertTrue(settingsPage().statusMessage().isEnabled());
     }
 }

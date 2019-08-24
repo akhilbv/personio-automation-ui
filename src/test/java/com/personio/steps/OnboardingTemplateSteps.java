@@ -16,10 +16,17 @@ public class OnboardingTemplateSteps extends TestContext {
         settingsPage().onBoardingPage().onBoardingTemplateTab().addTemplateButton().click();
     }
 
-    @Then("^template \"([^\"]*)\" should be listed in the template list$")
-    public void templateShouldList(String templateName) {
+    @Then("^template \"([^\"]*)\" (should be|should not be) listed in the template list$")
+    public void templateShouldList(String templateName, String choice) {
         boolean isStepPresent = settingsPage().onBoardingPage().onBoardingTemplateTab().templateList().contains(templateName);
-        Assert.assertEquals("Created step " + templateName + " is not present in the step list ", true, isStepPresent);
+        switch (choice) {
+            case "should be":
+                Assert.assertEquals("Created step " + templateName + " is not present in the step list ", true, isStepPresent);
+                break;
+            case "should not be":
+                Assert.assertEquals("Created step " + templateName + " is not present in the step list ", false, isStepPresent);
+                break;
+        }
     }
 
     @When("^I click on the Add step link in onboarding templates tab$")
@@ -30,7 +37,7 @@ public class OnboardingTemplateSteps extends TestContext {
 
     @Then("^Add step to template dialogue should be displayed$")
     public void dialogueDisplay() {
-        boolean isDialogueVisible = settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().isVisible();
+        boolean isDialogueVisible = settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().isEnabled();
         Assert.assertEquals("Add step to template dialogue is not visible", true, isDialogueVisible);
 
         String header = settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().getHeader();
@@ -61,12 +68,19 @@ public class OnboardingTemplateSteps extends TestContext {
 
     @Then("The field \"([^\"]*)\" at row \"([^\"]*)\" and column \"([^\"]*)\" of step lists has value \"([^\"]*)\"")
     public void stepTableContains(String tagName, int rowIndex, int columnIndex, String expectedValue) {
-        String actualValue = settingsPage().onBoardingPage().onBoardingTemplateTab().addedSteps().getCellFieldValue(rowIndex, columnIndex,tagName);
+        String actualValue = settingsPage().onBoardingPage().onBoardingTemplateTab().addedSteps().getCellFieldValue(rowIndex, columnIndex, tagName);
         Assert.assertEquals(expectedValue, actualValue);
     }
 
     @Then("^I click on the create button of steps to template dialogue")
     public void iClickOnCreate() {
-        settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().accept();
+        settingsPage().onBoardingPage().onBoardingTemplateTab().addStepDialogue().create().click();
     }
+
+    @When("^I delete the onboarding templates with name \"([^\"]*)\"$")
+    public void iDeleteTemplate(String templateName) {
+        settingsPage().onBoardingPage().onBoardingTemplateTab().deleteTemplates(templateName);
+    }
+
+
 }

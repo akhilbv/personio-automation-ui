@@ -12,7 +12,7 @@ Step definitions for on boarding
 public class OnBoardingPageSteps extends TestContext {
     @Then("^Onboarding page should be loaded$")
     public void settingsPageLoaded() {
-        boolean isPageVisible = settingsPage().onBoardingPage().isVisible();
+        boolean isPageVisible = settingsPage().onBoardingPage().isEnabled();
         Assert.assertEquals("Expected onboarding page to be displayed ", true, isPageVisible);
         settingsPage().waitForAjaxAndJSToLOad();
     }
@@ -29,10 +29,17 @@ public class OnBoardingPageSteps extends TestContext {
         settingsPage().onBoardingPage().onBoardingStepsTab().addStepButton().click();
     }
 
-    @Then("^Step \"([^\"]*)\" should be listed in the step list$")
-    public void stepShouldList(String stepName) {
+    @Then("^Step \"([^\"]*)\" (should be|should not be) listed in the step list$")
+    public void stepShouldList(String stepName, String choice) {
         boolean isStepPresent = settingsPage().onBoardingPage().onBoardingStepsTab().stepList().contains(stepName);
-        Assert.assertEquals("Created step " + stepName + " is not present in the step list ", true, isStepPresent);
+        switch (choice) {
+            case "should be":
+                Assert.assertEquals("Created step " + stepName + " is not present in the step list ", true, isStepPresent);
+                break;
+            case "should not be":
+                Assert.assertEquals("Created step " + stepName + " is not present in the step list ", false, isStepPresent);
+                break;
+        }
     }
 
     @When("^I click on the Add item link in onboarding steps tab$")
@@ -43,7 +50,7 @@ public class OnBoardingPageSteps extends TestContext {
 
     @Then("^Add item to step dialogue should be displayed$")
     public void dialogueDisplay() {
-        boolean isDialogueVisible = settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().isVisible();
+        boolean isDialogueVisible = settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().isEnabled();
         Assert.assertEquals("Add item to step dialogue is not visible", true, isDialogueVisible);
 
         String header = settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().getHeader();
@@ -52,7 +59,7 @@ public class OnBoardingPageSteps extends TestContext {
 
     @Then("^I click on the create button of add items to step dialogue$")
     public void iClickOnCreate() {
-        settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().accept();
+        settingsPage().onBoardingPage().onBoardingStepsTab().addStepDialogue().create().click();
     }
 
     @When("^I add an item of type \"([^\"]*)\" to step$")
@@ -64,6 +71,7 @@ public class OnBoardingPageSteps extends TestContext {
     @Then("^\"([^\"]*)\" should be displayed in the \"([^\"]*)\" row of step items$")
     public void itemShouldDisplay(String itemType, int index) {
         boolean isVisible = false;
+        settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().waitForVisibility();
         isVisible = settingsPage().onBoardingPage().onBoardingStepsTab().stepItemsTable().containsRowAtIndexWithTag(index, itemType);
         Assert.assertTrue(isVisible);
     }
@@ -84,5 +92,9 @@ public class OnBoardingPageSteps extends TestContext {
         settingsPage().onBoardingPage().onBoardingStepsTab().saveChanges().click();
     }
 
+    @When("^I delete the onboarding steps with name \"([^\"]*)\"$")
+    public void iDeleteTemplate(String stepName) {
+        settingsPage().onBoardingPage().onBoardingStepsTab().deleteSteps(stepName);
+    }
 
 }

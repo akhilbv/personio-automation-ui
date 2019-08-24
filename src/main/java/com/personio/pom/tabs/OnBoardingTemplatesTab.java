@@ -4,6 +4,7 @@ import com.personio.automation.ui.type.html.*;
 import com.personio.automation.ui.web.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+
 public class OnBoardingTemplatesTab extends Div {
 
     public OnBoardingTemplatesTab(RemoteWebDriver driver) {
@@ -46,8 +47,30 @@ public class OnBoardingTemplatesTab extends Div {
         return new SelectItem(getDriver(), "offset_direction", By.ByType.Name);
     }
 
-    public Table addedSteps()
-    {
-        return new Table(getDriver(),getElement(),"div.block-section.tab-pane.active table tbody", By.ByType.CSS);
+    public Table addedSteps() {
+        return new Table(getDriver(), getElement(), "div.block-section.tab-pane.active table tbody", By.ByType.CSS);
+    }
+
+    public Button deleteButton() {
+        return new Button(getDriver(), "div.block-section.tab-pane.active a[href='#modal-delete-template']", By.ByType.CSS);
+    }
+
+    public ModalDialogue deleteConfirmation() {
+        return new ModalDialogue(getDriver(), "div#modal-delete-template div.modal-content", By.ByType.CSS);
+    }
+
+    public void deleteTemplates(String templateName) {
+        while (templateList().contains(templateName)) {
+            templateList().getListItem(templateName).click();
+            deleteButton().click();
+            deleteConfirmation().delete().click();
+        }
+    }
+
+    public void deleteTemplate(String templateName) {
+        if (templateList().contains(templateName)) {
+            templateList().getListItem(templateName).click();
+        }
+        deleteButton().click();
     }
 }

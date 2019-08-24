@@ -11,7 +11,7 @@ public class EmployeesPageSteps extends TestContext {
 
     @Then("^Employees page should be loaded$")
     public void employeePageLoaded() {
-        boolean isPageVisible = employeesPage().employeeSearchBox().isVisible();
+        boolean isPageVisible = employeesPage().employeeSearchBox().isEnabled();
         Assert.assertEquals("Expected employees page to be displayed ", true, isPageVisible);
         employeesPage().waitForAjaxAndJSToLOad();
     }

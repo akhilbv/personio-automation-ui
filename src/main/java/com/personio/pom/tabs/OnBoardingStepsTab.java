@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 /*Properties of On boarding steps page
  */
 public class OnBoardingStepsTab extends Div {
@@ -33,9 +35,11 @@ public class OnBoardingStepsTab extends Div {
     public ModalDialogue addStepDialogue() {
         return new ModalDialogue(getDriver(), "div#modal-add-item div.modal-content", By.ByType.CSS);
     }
+
     public ModalDialogue dialogue() {
         return new ModalDialogue(getDriver(), "div.modal-content", By.ByType.CSS);
     }
+
     public Select itemType() {
         WebElement select = new SelectItem(getDriver(), "item_type", By.ByType.Name).getElement();
         return new Select(select);
@@ -48,4 +52,28 @@ public class OnBoardingStepsTab extends Div {
     public Button saveChanges() {
         return new Button(getDriver(), getElement(), "div.block-section.tab-pane.active button.btn.btn-sm.btn-primary", By.ByType.CSS);
     }
+
+    public Button deleteButton() {
+        return new Button(getDriver(), "div.block-section.tab-pane.active a[href='#modal-delete-step'] i", By.ByType.CSS);
+    }
+
+    public ModalDialogue deleteConfirmation() {
+        return new ModalDialogue(getDriver(), "div#modal-delete-step div.modal-content", By.ByType.CSS);
+    }
+
+    public void deleteSteps(String stepName) {
+        while(stepList().contains(stepName)) {
+            stepList().getListItem(stepName).click();
+            deleteButton().click();
+            deleteConfirmation().delete().click();
+        }
+    }
+
+    public void deleteStep(String stepName) {
+        if (stepList().contains(stepName)) {
+            stepList().getListItem(stepName).click();
+        }
+        deleteButton().click();
+    }
+
 }

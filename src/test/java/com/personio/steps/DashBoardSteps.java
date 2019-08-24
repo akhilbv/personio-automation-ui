@@ -18,10 +18,10 @@ public class DashBoardSteps extends TestContext {
 
     @Then("^Home page of the user \"([^\"]*)\" is loaded$")
     public void homePageIsLoaded(String userFullName) {
-        boolean isDhashboardVisible = dashBoard().Div("dashboard-v2-container", By.ByType.Id).isVisible();
+        boolean isDhashboardVisible = dashBoard().Div("dashboard-v2-container", By.ByType.Id).isEnabled();
         Assert.assertEquals("Dashboard is not visible after login", true, isDhashboardVisible);
 
-        boolean isUserNameVisible = dashBoard().Div("//div[text()='" + userFullName + "']", By.ByType.Xpath).isVisible();
+        boolean isUserNameVisible = dashBoard().Div("//div[text()='" + userFullName + "']", By.ByType.Xpath).isEnabled();
         Assert.assertEquals("User name:"+userFullName+" is not visible in the profile panel", true, isUserNameVisible);
     }
 
