@@ -1,5 +1,6 @@
 package com.personio.Hooks;
 
+import com.cucumber.listener.Reporter;
 import com.personio.automation.ui.context.TestContext;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -20,7 +21,8 @@ public class CommonHooks {
     public void afterScenario(Scenario scenarioContext) throws IOException {
         LOGGER.info("Execution Finished for scenario: " + scenarioContext.getName() + " execution status :" + scenarioContext.getStatus());
         if (scenarioContext.isFailed()) {
-            TestContext.browser.takeScreenShot("target/cucumber-reports/screenshots/" + scenarioContext.getName() + ".png");
+            TestContext.browser.takeScreenShot("test-results/cucumber-reports/screenshots/" + scenarioContext.getName() + ".png");
+            Reporter.addScreenCaptureFromPath("screenshots/" + scenarioContext.getName() + ".png");
         }
         TestContext.testTearDown();
     }
