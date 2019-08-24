@@ -1,15 +1,18 @@
 package com.personio.automation.ui.web;
 
 import com.personio.automation.ui.AutomationError;
-import com.personio.automation.ui.com.personio.automation.ui.utils.TestConfig;
+import com.personio.automation.ui.utils.TestConfig;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -41,12 +44,12 @@ public class Browser {
         platform = this.getTestConfig().getPlatform();
         isHeadless = this.getTestConfig().isHeadless();
 
-        desiredCapabilities.setBrowserName(this.browserName);
-
         switch (this.platform.toUpperCase()) {
             case "ANDROID":
-                desiredCapabilities.setCapability("platformName", "Android");
+                desiredCapabilities.setPlatform(Platform.ANDROID);
                 desiredCapabilities.setCapability("deviceName", this.getTestConfig().getDeviceName());
+                desiredCapabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
+                desiredCapabilities.setCapability("platformName", "Android");
                 break;
             case "WINDOWS":
                 desiredCapabilities.setCapability("platformName", "Windows");
@@ -65,9 +68,11 @@ public class Browser {
         switch (this.browserName.toUpperCase()) {
             case "CHROME":
                 this.setupChromeDriver(isHeadless);
+                desiredCapabilities.setBrowserName("chrome");
                 break;
             case "FIREFOX":
                 this.setupFirefoxDriver(isHeadless);
+                desiredCapabilities.setBrowserName("firefox");
                 break;
             case "IE":
                 this.setupIeDriver();
@@ -112,7 +117,7 @@ public class Browser {
             } else {
                 File file = new File(System.getProperty("user.dir") + File.separator + "libs" + File.separator + "geckodriver.exe");
                 System.setProperty("webdriver.gecko.driver", file.getAbsolutePath());
-                this.driver = new FirefoxDriver();
+                this.driver = new FirefoxDriver(firefoxOptions);
             }
         } catch (Exception ex) {
             throw new AssertionError("Unable to start firefox driver : " + ex.getMessage());
@@ -135,7 +140,7 @@ public class Browser {
                 this.driver = new InternetExplorerDriver();
             }
         } catch (Exception ex) {
-            throw new AssertionError("Unable to start firefox driver : " + ex.getMessage());
+            throw new AssertionError("Unable to start Ie driver : " + ex.getMessage());
         }
     }
 
