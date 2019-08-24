@@ -12,7 +12,6 @@ import com.personio.pom.pages.SettingsPage;
 */
 public class TestContext {
     public static Browser browser;
-    public String userName;
     private DashBoard dashBoard;
     private LoginPage loginPage;
     private NavigationSideBar navigationSideBar;

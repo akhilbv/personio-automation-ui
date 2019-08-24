@@ -1,6 +1,5 @@
 package com.personio.pom.pages;
 
-import com.personio.automation.ui.type.html.Link;
 import com.personio.automation.ui.web.Browser;
 import com.personio.automation.ui.web.By;
 import com.personio.automation.ui.web.Page;
@@ -13,6 +12,6 @@ public class DashBoard extends Page {
         super(browser);
         waitForPage("Dashboard");
         waitForAjaxAndJSToLOad();
-        waitForElement(By.ByType.Id,"dashboard-v2-container");
+        waitForElement(By.ByType.Id, "dashboard-v2-container");
     }
 }

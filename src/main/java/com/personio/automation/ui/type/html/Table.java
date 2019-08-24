@@ -7,7 +7,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.personio.automation.ui.web.By.by;
 

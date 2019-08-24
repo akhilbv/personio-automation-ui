@@ -1,7 +1,6 @@
 package com.personio.automation.ui.type.html;
 
 import com.personio.automation.ui.web.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 /*
