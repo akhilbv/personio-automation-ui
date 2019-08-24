@@ -12,5 +12,7 @@ public class DashBoard extends Page {
     public DashBoard(Browser browser) {
         super(browser);
         waitForPage("Dashboard");
+        waitForAjaxAndJSToLOad();
+        waitForElement(By.ByType.Id,"dashboard-v2-container");
     }
 }

@@ -19,6 +19,8 @@ public class LoginPage extends Page {
         waitForPage("Personio");
         waitForAjaxAndJSToLOad();
         waitForElement(By.ByType.Id,"email");
+        waitForElement(By.ByType.Id,"password");
+        waitForElement(By.ByType.CSS,"button[type=submit]");
     }
 
     private TextField userName() {

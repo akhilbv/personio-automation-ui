@@ -20,18 +20,26 @@ public class Page {
 
     private RemoteWebDriver driver;
     private int pageWaitTimeOut = 30;
+    private int elementWaitTimeOut = 30;
     private static final Logger LOGGER = Logger.getLogger("automation");
+
     /*
   Initialising the page properties
   */
     public Page(Browser browser) {
         this.driver = browser.getDriver();
-        String pageWait = System.getProperty("pageWaitTimeOut");
+        String pageWait = System.getProperty("pageWaitTimeout");
+        String elementWait = System.getProperty("elementWaitTimeout");
+        ResourceBundle configProperties = ResourceBundle.getBundle("config");
         if (pageWait == null) {
-            ResourceBundle configProperties = ResourceBundle.getBundle("config");
             pageWait = configProperties.getString("pageWaitTimeout");
         }
+        if(elementWait == null)
+        {
+            elementWait = configProperties.getString("elementWaitTimeout");
+        }
         pageWaitTimeOut = Integer.parseInt(pageWait);
+        elementWaitTimeOut = Integer.parseInt(elementWait);
         waitForAjaxAndJSToLOad();
     }
 
@@ -59,16 +67,17 @@ public class Page {
     /*
 wait for the element until timeout
 */
-    public void waitForElement(By.ByType identifierType,String identifier) {
-        WebDriverWait elementWait = new WebDriverWait(getDriver(),pageWaitTimeOut);
-        elementWait.until(ExpectedConditions.presenceOfElementLocated(by(identifierType,identifier)));
+    public void waitForElement(By.ByType identifierType, String identifier) {
 
-        Function<RemoteWebDriver,Boolean> isElementEnabled = driver -> driver.findElement(by(identifierType, identifier)).isEnabled();
+        WebDriverWait elementWait = new WebDriverWait(getDriver(), elementWaitTimeOut);
+        elementWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by(identifierType, identifier)));
+
+        Function<RemoteWebDriver, Boolean> isElementEnabled = driver -> driver.findElement(by(identifierType, identifier)).isEnabled();
         try {
-            if(!isElementEnabled.apply(getDriver())){
+            if (!isElementEnabled.apply(getDriver())) {
                 FluentWait<RemoteWebDriver> wait = new FluentWait<>(getDriver())
                         .pollingEvery(Duration.ofSeconds(2))
-                        .withTimeout(Duration.ofSeconds(pageWaitTimeOut))
+                        .withTimeout(Duration.ofSeconds(elementWaitTimeOut))
                         .ignoring(NoSuchElementException.class);
                 wait.until(isElementEnabled);
             }
@@ -84,9 +93,8 @@ wait for the element until timeout
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), pageWaitTimeOut);
             wait.until(ExpectedConditions.titleContains(pageTitle));
-        }catch (TimeoutException ex)
-        {
-            LOGGER.warning("Expected condition failed: waiting for title to contain "+pageTitle);
+        } catch (TimeoutException ex) {
+            LOGGER.warning("Expected condition failed: waiting for title to contain " + pageTitle);
         }
     }
 
@@ -104,30 +112,30 @@ wait for the element until timeout
     }
 
     public Div Div(String identifier, By.ByType identifierType) {
-        return new Div(getDriver(), identifier,identifierType);
+        return new Div(getDriver(), identifier, identifierType);
     }
 
-    public Label Label(String identifier,By.ByType identifierType) {
-        return new Label(getDriver(), identifier,identifierType);
+    public Label Label(String identifier, By.ByType identifierType) {
+        return new Label(getDriver(), identifier, identifierType);
     }
 
-    public Link Link(String identifier,By.ByType identifierType) {
-        return new Link(getDriver(), identifier,identifierType);
+    public Link Link(String identifier, By.ByType identifierType) {
+        return new Link(getDriver(), identifier, identifierType);
     }
 
     public SelectItem Select(String identifier, By.ByType identifierType) {
-        return new SelectItem(getDriver(), identifier,identifierType);
+        return new SelectItem(getDriver(), identifier, identifierType);
     }
 
-    public Table Table(String identifier,By.ByType identifierType) {
-        return new Table(getDriver(), identifier,identifierType);
+    public Table Table(String identifier, By.ByType identifierType) {
+        return new Table(getDriver(), identifier, identifierType);
     }
 
-    public TextArea TextArea(String identifier,By.ByType identifierType) {
-        return new TextArea(getDriver(), identifier,identifierType);
+    public TextArea TextArea(String identifier, By.ByType identifierType) {
+        return new TextArea(getDriver(), identifier, identifierType);
     }
 
-    public TextField TextField(String identifier,By.ByType identifierType) {
-        return new TextField(getDriver(), identifier,identifierType);
+    public TextField TextField(String identifier, By.ByType identifierType) {
+        return new TextField(getDriver(), identifier, identifierType);
     }
 }

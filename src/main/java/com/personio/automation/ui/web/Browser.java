@@ -44,8 +44,6 @@ public class Browser {
         platform = this.getTestConfig().getPlatform();
         isHeadless = this.getTestConfig().isHeadless();
 
-        desiredCapabilities.setBrowserName(this.browserName);
-
         switch (this.platform.toUpperCase()) {
             case "ANDROID":
                 desiredCapabilities.setPlatform(Platform.ANDROID);
@@ -70,9 +68,11 @@ public class Browser {
         switch (this.browserName.toUpperCase()) {
             case "CHROME":
                 this.setupChromeDriver(isHeadless);
+                desiredCapabilities.setBrowserName("chrome");
                 break;
             case "FIREFOX":
                 this.setupFirefoxDriver(isHeadless);
+                desiredCapabilities.setBrowserName("firefox");
                 break;
             case "IE":
                 this.setupIeDriver();
