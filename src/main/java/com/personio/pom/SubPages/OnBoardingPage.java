@@ -1,6 +1,5 @@
 package com.personio.pom.SubPages;
 
-import com.personio.automation.ui.type.html.Button;
 import com.personio.automation.ui.type.html.Div;
 
 import com.personio.automation.ui.type.html.ListItem;
